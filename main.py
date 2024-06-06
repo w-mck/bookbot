@@ -6,17 +6,12 @@ def main():
     num_characters = get_num_characters(text)
     
     sorted_chars = sort_chars(num_characters)
-    #print(sorted_chars)
+
     create_report(book_path, num_words, sorted_chars)
 
-
-def create_report(book_path, num_words, list_chars):
-    print(f"--- Begin report of {book_path} ---")
-    print(f"{num_words} words found in the document\n")
-
-    for i in range(len(list_chars)):
-        print(f"The '{list_chars[i]['character']}' character was found {list_chars[i]['count']} times")
-
+def get_book_text(path):
+    with open(path) as f:
+        return f.read()
 
 def get_num_words(text):
     words = text.split()
@@ -46,10 +41,12 @@ def sort_chars(chars):
     
     character_list.sort(reverse=True, key=sort_on)
     return character_list
-    
 
-def get_book_text(path):
-    with open(path) as f:
-        return f.read()
+def create_report(book_path, num_words, list_chars):
+    print(f"--- Begin report of {book_path} ---")
+    print(f"{num_words} words found in the document\n")
+
+    for i in range(len(list_chars)):
+        print(f"The '{list_chars[i]['character']}' character was found {list_chars[i]['count']} times")
 
 main()
